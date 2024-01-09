@@ -8,7 +8,7 @@ module.exports = {
   },
   networks: {                      // and this ... 
     hardhat: {
-      chainId: 1337                // this is needed for MetaMask
+      chainId: 31337                // this is needed for MetaMask
     }
   }
 };
