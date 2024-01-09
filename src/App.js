@@ -1,30 +1,26 @@
 import './App.css';
 import { useState } from 'react';
-// import { ethers } from 'ethers'   // acts like a backend for our Web3/DApp 
-import Greeter from './artifacts/contracts/Greeter.sol/Greeter.json'
+import { ethers } from 'ethers'; // ethers をインポートします
+import Greeter from './artifacts/contracts/Greeter.sol/Greeter.json';
 
-const ethers = require("ethers")
-const greeterAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+const greeterAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 function App() {
-  // store greeting in local state of react. Has nothing to do with the smart contract at the moment
-  const [greeting, setGreetingValue] = useState()
+  const [greeting, setGreetingValue] = useState();
 
-  // request access to the user's account. This works regardless of the wallet you're using. 
   async function requestAccount() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
 
-  // call the smart contract, read the current greeting value
   async function fetchGreeting() {
     if (typeof window.ethereum !== 'undefined') {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(greeterAddress, Greeter.abi, provider)
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(greeterAddress, Greeter.abi, provider);
       try {
-        const data = await contract.greet()
-        console.log('data: ', data)
+        const data = await contract.greet();
+        console.log('data: ', data);
       } catch (err) {
-        console.log("Error: ", err)
+        console.log("Error: ", err);
       }
     }    
   }
