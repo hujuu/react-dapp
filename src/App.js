@@ -29,17 +29,26 @@ function App() {
     }    
   }
 
-  // call the smart contract, send an update
   async function setGreeting() {
-    if (!greeting) return
+    if (!greeting) {
+      console.log("Greeting is empty.");
+      return;
+    }
     if (typeof window.ethereum !== 'undefined') {
-      await requestAccount()
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner()
-      const contract = new ethers.Contract(greeterAddress, Greeter.abi, signer)
-      const transaction = await contract.setGreeting(greeting)
-      await transaction.wait()
-      fetchGreeting()
+      try {
+        await requestAccount();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(greeterAddress, Greeter.abi, signer);
+        const transaction = await contract.setGreeting(greeting);
+        await transaction.wait();
+        console.log("Greeting updated successfully.");
+        fetchGreeting();
+      } catch (err) {
+        console.error("Error in setGreeting:", err);
+      }
+    } else {
+      console.log("Ethereum object not found.");
     }
   }
 
