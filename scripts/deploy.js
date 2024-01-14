@@ -15,6 +15,12 @@ async function main() {
   console.log(
     `Greeter deployed to:${greeter.target}`
   );
+
+  // in function main, add the following
+  const Token = await hre.ethers.getContractFactory("Token");
+  const token = await Token.deploy();
+  await token.waitForDeployment();
+  console.log("Token deployed to:", token.target);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
