@@ -3,12 +3,12 @@ require("@nomicfoundation/hardhat-toolbox");
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.19",
-  paths: {                         // add this 
-    artifacts: './src/artifacts',  // this is where our compiled contracts will go
+  paths: {
+    artifacts: './src/artifacts'
   },
-  networks: {                      // and this ... 
+  networks: {
     hardhat: {
-      chainId: 31337                // this is needed for MetaMask
+      chainId: 31337
     }
   }
 };
